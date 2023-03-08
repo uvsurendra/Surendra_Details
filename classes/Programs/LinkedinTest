@@ -1,0 +1,120 @@
+package alltestngkeywords;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class LinkedinTest {
+	public WebDriver driver=null;
+	public WebDriverWait wait=null;
+	
+	@BeforeClass
+	public void launcingLinkedin() {
+		
+		WebDriverManager.chromedriver().setup();
+		driver=new ChromeDriver();
+		driver.get("https://www.linkedin.com/");
+		//maximize the window
+		driver.manage().window().maximize();
+		
+	}
+	@Test()
+	public void doLogin() {
+		String title="LinkedIn: Log In or Sign Up";
+		//verify title
+		wait=new WebDriverWait(driver,Duration.ofSeconds(5000));
+		wait.until(ExpectedConditions.titleContains(title));
+		
+		//verify pagetitle button
+		Assert.assertEquals(title,driver.getTitle());//(extepected,actual)
+		
+		//login button
+		WebElement loginButton=driver.findElement(By.xpath("//a[contains(text(),'Sign in')]"));
+		wait.until(ExpectedConditions.visibilityOf(loginButton));
+		
+		loginButton.click();
+		
+		//verify LoginPagetitle 
+		String loginPageTitle="LinkedIn Login, Sign in | LinkedIn";
+		Assert.assertEquals(loginPageTitle, driver.getTitle());
+		
+		Reporter.log("Successfully Verified Loginpage Title");
+		
+		
+	}
+	
+@Parameters({"userName","password"})
+//@Test(priority=1)///alwaysRun=true,
+@Test(dependsOnMethods={"doLogin"},alwaysRun=true)	
+public void inputData(String userName,String password) throws InterruptedException {
+	
+	WebElement uName=driver.findElement(By.id("username"));
+	wait.until(ExpectedConditions.visibilityOf(uName));
+	driver.findElement(By.id("username")).sendKeys(userName);
+	Thread.sleep(3000);
+	
+	//input password
+	driver.findElement(By.id("password")).sendKeys(password);
+	
+	//click on signin button
+	driver.findElement(By.cssSelector("button[class*='btn__primary']")).click();
+	
+}
+
+@Test(dependsOnMethods={"inputData"},enabled=false)
+public void signOut() throws InterruptedException{
+	//veriy page title
+	String title="Feed | LinkedIn";
+	
+	//verify title
+	wait.until(ExpectedConditions.titleContains(title));
+	Thread.sleep(5000);
+	//verify pagetitle button
+	//Assert.assertEquals(title,driver.getTitle());//(extepected,actual)
+	
+	//profilerealcard button
+	WebElement realCardButton=driver.findElement(By.xpath("(//img[contains(@id,'ember1')])[1]"));
+	wait.until(ExpectedConditions.visibilityOf(realCardButton));
+	
+	realCardButton.click();
+	
+	//am introducing 2 more wait commands
+	wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='global-nav__secondary-link mv1'][contains(.,'Sign Out')]")));
+
+	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='global-nav__secondary-link mv1'][contains(.,'Sign Out')]")));
+	
+	Thread.sleep(3000);
+	//click on signout
+	WebElement signoutButton=driver.findElement(By.xpath("//a[@class='global-nav__secondary-link mv1'][contains(.,'Sign Out')]"));
+	wait.until(ExpectedConditions.visibilityOf(signoutButton));
+	//signoutButton.sendKeys("venky");
+	signoutButton.click();
+	Thread.sleep(5000);
+	Reporter.log("Successfully logout");
+	
+	String signPageTitle="LinkedIn: Log In or Sign Up";
+	
+	Assert.assertEquals(signPageTitle, driver.getTitle());
+	driver.close();
+	
+	
+}
+
+
+
+
+
+}

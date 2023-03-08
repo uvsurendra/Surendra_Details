@@ -1,0 +1,60 @@
+package collections;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+
+
+
+public class ListDemo {
+	
+
+	public static void main(String[] args) {
+		//non generic
+		List groupValues=new ArrayList();
+		//inserting an element
+		//collectionname.add("value);
+		groupValues.add("java");
+		
+		//inserting another value
+		groupValues.add("selenium");
+		
+		//print the size() of a collection
+		System.out.println("collection of size"+groupValues.size());
+		//inserting more than one value
+		groupValues.addAll(Arrays.asList("naveena","geethika",25,40,true,'a'));
+		System.out.println("After addAll() collection of size"+groupValues.size());
+		boolean result=groupValues.contains("java");
+		System.out.println("coolection have java value it returns  "+result);
+		
+		//remove value
+		groupValues.remove("selenium");
+		System.out.println("After remove() collection of size"+groupValues.size());
+		
+		//verify index value 
+		
+		System.out.println("2nd index value is"+groupValues.get(2));
+		System.out.println("3rd index value is"+groupValues.get(3));
+		
+		boolean indexResult=groupValues.get(2).equals("geethika");
+		//iterating the collection
+		System.out.println(indexResult);
+		Iterator it=groupValues.iterator();
+		
+		while(it.hasNext()) {
+			System.out.println(it.next());
+		}
+	System.out.println("starting for each loop ");
+		for( Object o:groupValues ) {
+			System.out.println(o);
+		}
+		System.out.println("end of for each loop");
+		for(int i=0;i<groupValues.size();i++) {
+			System.out.println(groupValues.get(i));
+		}
+		System.out.println("end of the for loop");
+
+	}
+
+}

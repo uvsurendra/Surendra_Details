@@ -1,0 +1,73 @@
+package firstmavenpackage;
+
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+
+public class HandlingPopUps {
+
+	public static void main(String[] args) throws InterruptedException {
+		
+		WebDriverManager.chromedriver().setup();
+		WebDriver driver=new ChromeDriver();
+		WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(5000));
+		
+		driver.get("https://www.zkoss.org/zkdemo/input/button");
+		//Reporter.log("Click on Button link"); 
+		//  driver.findElement(By.linkText("Button")).click();
+		// String title="ZK Live Demo - Button";
+		 //Assert.assertEquals(title, driver.getTitle());
+		Thread.sleep(3000);
+		WebElement ttrFrame=driver.findElement(By.id("twitter-widget-0"));
+		driver.switchTo().frame(ttrFrame);
+		 Thread.sleep(3000);
+		//click on tweet Button
+		 driver.findElement(By.xpath("//span[text()='Tweet']")).click();
+		 
+		 Set<String>allWids=driver.getWindowHandles();
+		 //converting Set collection into list collection
+		 List<String>ids=new ArrayList<>(allWids);
+		 driver.switchTo().window(ids.get(1));
+		 Thread.sleep(3000);
+		 //click on log in button
+		 driver.findElement(By.xpath("(//span[text()='Log in'])[2]")).click();
+		 Thread.sleep(5000);
+		 /**		 
+		 driver.findElement(By.xpath("(//span[text()='Sign in with Google'])[1]")).click();
+	 
+		 Set<String>gmailids=driver.getWindowHandles();
+		 
+		 List<String>idss=new ArrayList<>(gmailids);
+		 driver.switchTo().window(idss.get(1));
+		 
+		 **/
+		 WebElement popFrame=driver.findElement(By.cssSelector("iframe[title*='Google Button']"));
+		 wait.until(ExpectedConditions.visibilityOf(popFrame));
+		 Thread.sleep(3000);
+		 driver.switchTo().frame(popFrame);
+		 Thread.sleep(3000);
+		 driver.findElement(By.xpath("(//span[text()='Sign in with Google'])[1]")).click();
+		 Thread.sleep(3000);
+		// WebElement inputBox= driver.findElement(By.xpath("//span[contains(text(),'Phone, email')]"));
+		 Set<String>goolgeWindows=driver.getWindowHandles();
+		 //converting Set collection into list collection
+		 List<String>allwids=new ArrayList<>(goolgeWindows);
+		 driver.switchTo().window(allwids.get(2));
+		 
+		 driver.findElement(By.name("identifier")).sendKeys("tatavenky52@gmail.com");
+		 Thread.sleep(5000);
+		 driver.quit();
+	}
+	
+}

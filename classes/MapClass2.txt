@@ -1,0 +1,53 @@
+package collections;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
+
+public class CollectionDemo {
+
+	public static void main(String[] args) {
+		Map<String,Double>shirts=new TreeMap<>();
+		shirts.put("uspolo",1500.99);
+		shirts.put("netplay",1000.99);
+		shirts.put("spykar",1300.99);
+		shirts.put("peterengland",2000.99);
+		shirts.put("mufti",2500.99);
+		System.out.println("collection of size "+shirts.size());
+		boolean identifyValue=shirts.containsKey("netplay");
+		System.out.println(identifyValue);
+		//boolean collect=shirts.get(3).equals("peterengland");
+		//System.out.println(collect);
+	    Map<String,Double> paints=new TreeMap<>();
+	    paints.put("DNMX", 999.99);
+	    paints.put("wrangler", 1599.99);
+	    paints.put("denim", 2999.99);
+	    paints.put("sin", 2599.99);
+	    paints.putAll(shirts);
+		System.out.println("After putall method collection of size "+paints.size());
+		
+		Set<Map.Entry<String, Double>> collection = paints.entrySet();	
+		for(Map.Entry<String, Double> shirtsPaintsCollection:collection) {
+			System.out.println(shirtsPaintsCollection.getKey()+":"+shirtsPaintsCollection.getValue());
+			
+		}
+		Set<String> collect=paints.keySet();
+		for(String shirtPaintList:collect) {
+			System.out.println(shirtPaintList);
+		}
+			
+			
+		}
+			
+	}
+	

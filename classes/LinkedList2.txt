@@ -1,0 +1,30 @@
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
+public class LinkedDemo {
+
+	public static void main(String[] args) {
+		List<String> bikes=new LinkedList<String>();
+		bikes.add("HondaActiva");
+		bikes.add("BajajPulsur");
+		bikes.add("vespa");
+		System.out.println("collection of Size"+bikes.size());
+		bikes.addAll(Arrays.asList("RoyalEnfield","fz","KTM Duke","Scotty"));
+		System.out.println("collection of size"+bikes.size());
+		bikes.remove("fz");
+		System.out.println("After remove one Bike then collection of size"+bikes.size());
+		boolean bike=bikes.contains("KTM Duke");
+		System.out.println(bike);
+		boolean bi=bikes.get(5).equals("BajajPulsur");
+		Iterator it=bikes.iterator();
+		while(it.hasNext()) {
+			System.out.println(it.next());
+		}
+		//for(String bik:bikes) {
+			//System.out.println(bik);
+		//}
+	}
+
+}

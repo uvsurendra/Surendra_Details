@@ -1,0 +1,89 @@
+package collections;
+
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+
+public class MapDemo {
+
+	public static void main(String[] args) {
+		Map<String,Double> smartWatchesCollection=new TreeMap<>();
+		smartWatchesCollection.put("apple", 40000.00);
+		int value = smartWatchesCollection.get("apple").hashCode();
+		System.out.println("Apple Hashcode value is "+value);
+		
+		smartWatchesCollection.put("boat", 5000.00);
+		int value1 = smartWatchesCollection.get("boat").hashCode();
+		System.out.println("Boat Hashcode value is "+value1);
+		
+		smartWatchesCollection.put("fastTrack", 10000.00);
+		int value2 = smartWatchesCollection.get("fastTrack").hashCode();
+		System.out.println("FastTrack Hashcode value is "+value2);
+		
+		smartWatchesCollection.put("titan", 20000.00);
+		int value3 = smartWatchesCollection.get("titan").hashCode();
+		System.out.println("Titan Hashcode value is "+value3);
+		
+		smartWatchesCollection.put("noise", 8000.00);
+		int value4 = smartWatchesCollection.get("noise").hashCode();
+		System.out.println("Noise Hashcode value is "+value4);
+		
+		System.out.println("collection of smartwatchescollection size "+smartWatchesCollection.size());
+		
+		smartWatchesCollection.remove("boat");
+		System.out.println("After remove one value collection of smartwatchescollection size "+smartWatchesCollection.size());
+		
+		boolean idetifyValue = smartWatchesCollection.containsKey("titan");
+		System.out.println("Identify Value is "+idetifyValue);
+		
+		//boolean position = smartWatchesCollection.get(2).equals("fastTrack");
+		//System.out.println(position);
+		
+		System.out.println("********Hyderabad*********");
+		
+		Map<String,Double> smartTvs=new TreeMap<>();
+		smartTvs.put("samsung", 80000.00);
+		int smartTvValue = smartTvs.get("samsung").hashCode();
+		System.out.println("Samsung Hashcode value is "+smartTvValue);
+		
+		smartTvs.put("mi", 40000.00);
+		int smartTvValue2 = smartTvs.get("mi").hashCode();
+		System.out.println("mi Hashcode value is "+smartTvValue2);
+		
+		smartTvs.put("vivo", 50000.00);
+		int smartTvValue3 = smartTvs.get("vivo").hashCode();
+		System.out.println("Vivo Hashcode value is "+smartTvValue3);
+		
+		smartTvs.put("sony", 56000.00);
+		int smartTvValue4 = smartTvs.get("sony").hashCode();
+		System.out.println("Sony Hashcode value is "+smartTvValue4);
+		
+		smartTvs.put("lg", 20000.00);
+		int smartTvValue5 = smartTvs.get("lg").hashCode();
+		System.out.println("lg Hashcode value is "+smartTvValue5);
+		
+		System.out.println("collection of smartTvs "+smartTvs.size());
+		smartTvs.putAll(smartWatchesCollection);
+		
+		Set<String> allkeys=smartWatchesCollection.keySet();
+		for(String key:allkeys) {
+			System.out.println(key);
+		}
+		Set<String> allkeys2=smartTvs.keySet();
+		for(String key1:allkeys2) {
+			System.out.println(key1);
+		}
+		Set<Map.Entry<String, Double>> collection=smartTvs.entrySet();
+		for(Map.Entry<String, Double> list:collection) {
+			System.out.println(list.getKey()+":"+list.getValue());
+		}
+		
+		
+		
+		
+
+	}
+
+}

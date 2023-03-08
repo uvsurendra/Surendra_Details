@@ -1,0 +1,53 @@
+package firstmavenpackage;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class HandlingWindows {
+
+	public static void main(String[] args) throws InterruptedException {
+		
+		WebDriver driver=new ChromeDriver();
+		WebDriverManager.chromedriver().setup();
+		
+		driver.get("https://the-internet.herokuapp.com/windows");
+		
+		String parentWid=driver.getWindowHandle();
+		
+		System.out.println("parent window id "+parentWid);
+		
+		
+		
+		driver.findElement(By.linkText("Click Here")).click();
+		Set<String>allWindowIds=driver.getWindowHandles();
+		
+		for(String wid:allWindowIds) {//pwid
+			if(!wid.equals(parentWid)) {
+				System.out.println(wid);
+				Thread.sleep(2000);
+				driver.switchTo().window(wid);
+				Thread.sleep(2000);
+			}
+		}
+		String txt=driver.findElement(By.tagName("h3")).getText();
+        System.out.println("child window text is"+txt);
+		
+		//converting Set Collection List collection
+   //ListCollection<datatype>collecrtionname=new Implementedclassname<>(convertingcollectioname)
+		List<String>alWids=new ArrayList<>(allWindowIds);
+		
+		driver.switchTo().window(alWids.get(0));
+		Thread.sleep(2000);
+		driver.quit();
+		
+	}
+
+}

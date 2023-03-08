@@ -1,0 +1,39 @@
+package seleniumjavaproject;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class Dropdown {
+	public static void main(String[] arug) throws InterruptedException {
+		System.setProperty("webdriver.chrome.driver", "G:\\SeleniumJars\\chromedriver-107\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://signup.heroku.com/");
+		driver.manage().window().maximize();
+		WebElement heroku=driver.findElement(By.name("role"));
+		Thread.sleep(5000);
+		heroku.click();
+		Select sel=new Select(heroku);
+		sel.selectByIndex(6);
+		heroku.submit();
+		Thread.sleep(2000);
+		
+		WebElement herok=driver.findElement(By.name("self_declared_country"));
+		herok.click();
+		Select se=new Select(herok);
+		se.selectByValue("India");
+		herok.submit();
+		Thread.sleep(5000);
+		
+		WebElement hero=driver.findElement(By.name("main_programming_language"));
+		Select s=new Select(hero);
+		s.selectByVisibleText("Java");
+		Thread.sleep(5000);
+		
+		driver.close();
+		
+	}
+
+}
